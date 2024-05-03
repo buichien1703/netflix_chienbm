@@ -110,6 +110,8 @@ class AppDimens {
 
   static const double paddingTopScroll = 70;
   static const double paddingTopDefault = 0;
+  // max lines
+  static const int maxlineSix = 6;
 
   //other
   static const double heightAvatar = 27;

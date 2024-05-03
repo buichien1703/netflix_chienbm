@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:netflix_chienbm/features/detail_movie_page/src_detail_page.dart';
+import 'package:netflix_chienbm/values/src_values.dart';
 
 import '../../../common/utils.dart';
 import '../../../services/src_api.dart';
@@ -35,7 +36,6 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    print(widget.movieId);
     return Scaffold(
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
@@ -48,7 +48,7 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
               String genresText =
                   movie!.genres.map((genre) => genre.name).join(', ');
 
-              return movie == null ? SizedBox(child: Text("coming soon",style: TextStyle(color: Colors.red),),):Column(
+              return Column(
                 children: [
                   Stack(
                     children: [
@@ -79,7 +79,7 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsets.only(top: 25, left: 10, right: 10),
+                        const EdgeInsets.only(top: AppDimens.paddingSearchBarMedium, left: AppDimens.paddingSmall, right: AppDimens.paddingSmall),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -90,13 +90,13 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 15),
+                        const SizedBox(height: AppDimens.sizedboxMedium),
                         Row(
                           children: [
                             Text(
                               movie.releaseDate.year.toString(),
-                              style: const TextStyle(
-                                color: Colors.grey,
+                              style:  const TextStyle(
+                                color: AppColors.grey,
                               ),
                             ),
                             const SizedBox(
@@ -105,21 +105,21 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                             Text(
                               genresText,
                               style: const TextStyle(
-                                color: Colors.grey,
+                                color: AppColors.grey,
                                 fontSize: 17,
                               ),
                             ),
                           ],
                         ),
                         const SizedBox(
-                          height: 30,
+                          height: AppDimens.sizedboxLarge,
                         ),
                         Text(
                           movie.overview,
-                          maxLines: 6,
+                          maxLines: AppDimens.maxlineSix,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
-                              color: Colors.white, fontSize: 16),
+                              color: AppColors.white, fontSize: AppDimens.sizeIconSmall),
                         ),
                       ],
                     ),
@@ -134,20 +134,20 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                         final movie = snapshot.data;
 
                         return movie!.results.isEmpty
-                            ? const SizedBox(child: Text("Loading...."),)
+                            ? const SizedBox(child: Text(AppStr.loading),)
                             : Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Text(
-                                    "More like this",
-                                    maxLines: 6,
+                                   AppStr.more,
+                                    maxLines: AppDimens.maxlineSix,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                      color: Colors.white,
+                                      color: AppColors.white,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  const SizedBox(height: 20),
+                                  const SizedBox(height: AppDimens.sizedboxMedium),
                                   GridView.builder(
                                     physics:
                                         const NeverScrollableScrollPhysics(),
@@ -184,7 +184,7 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                                 ],
                               );
                       }
-                      return const Text("Something Went wrong");
+                      return const Text(AppStr.something);
                     },
                   ),
                 ],

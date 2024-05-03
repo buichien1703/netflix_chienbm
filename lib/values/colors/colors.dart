@@ -12,6 +12,7 @@ class AppColors {
   static const darkAccentColor = Color(0xFF25273f);
   //color
   static const Color black = Colors.black;
+  static const Color grey = Colors.grey;
   static const Color blue = Colors.blue;
   static const Color white = Colors.white;
   static const Color greyShadow = Color(0xff999999);
