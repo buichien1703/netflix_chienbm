@@ -15,23 +15,23 @@ class MovieDetailScreen extends StatefulWidget {
 }
 
 class MovieDetailScreenState extends State<MovieDetailScreen> {
-  ApiServices apiServices = ApiServices();
+  // ApiServices apiServices = ApiServices();
 
   late Future<DetailMovieModel> movieDetail;
   late Future<MovieRecommendationsModel> movieRecommendationModel;
 
   @override
   void initState() {
-    fetchInitialData();
+    // fetchInitialData();
     super.initState();
   }
 
-  fetchInitialData() {
-    movieDetail = apiServices.getDetailMovie(widget.movieId);
-    movieRecommendationModel =
-        apiServices.getMovieRecommendations(widget.movieId);
-    setState(() {});
-  }
+  // fetchInitialData() {
+  //   movieDetail = apiServices.getDetailMovie(widget.movieId);
+  //   movieRecommendationModel =
+  //       apiServices.getMovieRecommendations(widget.movieId);
+  //   setState(() {});
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -78,8 +78,10 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                     ],
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsets.only(top: AppDimens.paddingSearchBarMedium, left: AppDimens.paddingSmall, right: AppDimens.paddingSmall),
+                    padding: const EdgeInsets.only(
+                        top: AppDimens.paddingSearchBarMedium,
+                        left: AppDimens.paddingSmall,
+                        right: AppDimens.paddingSmall),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -95,7 +97,7 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                           children: [
                             Text(
                               movie.releaseDate.year.toString(),
-                              style:  const TextStyle(
+                              style: const TextStyle(
                                 color: AppColors.grey,
                               ),
                             ),
@@ -119,7 +121,8 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                           maxLines: AppDimens.maxlineSix,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
-                              color: AppColors.white, fontSize: AppDimens.sizeIconSmall),
+                              color: AppColors.white,
+                              fontSize: AppDimens.sizeIconSmall),
                         ),
                       ],
                     ),
@@ -134,12 +137,14 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                         final movie = snapshot.data;
 
                         return movie!.results.isEmpty
-                            ? const SizedBox(child: Text(AppStr.loading),)
+                            ? const SizedBox(
+                                child: Text(AppStr.loading),
+                              )
                             : Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Text(
-                                   AppStr.more,
+                                    AppStr.more,
                                     maxLines: AppDimens.maxlineSix,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
@@ -147,7 +152,8 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  const SizedBox(height: AppDimens.sizedboxMedium),
+                                  const SizedBox(
+                                      height: AppDimens.sizedboxMedium),
                                   GridView.builder(
                                     physics:
                                         const NeverScrollableScrollPhysics(),

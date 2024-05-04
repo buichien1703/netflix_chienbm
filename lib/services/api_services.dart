@@ -8,13 +8,14 @@ import 'package:http/http.dart' as http;
 
 import '../features/detail_movie_page/src_detail_page.dart';
 import '../features/home_page/model/src_model.dart';
-import '../features/home_page/model/top_rate/top_rated.dart';
 
 const baseUrl = "https://api.themoviedb.org/3/";
 var key = "?api_key=$apiKey";
 late String endPoint;
 
 class ApiServices {
+  ApiServices(HomePageControllerImp homePageControllerImp);
+
   Future<UpComingModel> getUpComing() async {
     endPoint = "movie/upcoming";
     final url = "$baseUrl$endPoint$key";
@@ -22,7 +23,8 @@ class ApiServices {
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
-      log("Success");
+      log("Success upcoming");
+      // print(response.body);
       return UpComingModel.fromJson(jsonDecode(response.body));
     }
     throw Exception("Failed to upload Upcoming");
@@ -39,19 +41,6 @@ class ApiServices {
       return UpComingModel.fromJson(jsonDecode(response.body));
     }
     throw Exception("Failed to upload now playing");
-  }
-
-  Future<TopRateModel> topRate() async {
-    endPoint = "tv/top_rated";
-    final url = "$baseUrl$endPoint$key";
-
-    final response = await http.get(Uri.parse(url));
-
-    if (response.statusCode == 200) {
-      log("Success top rated series");
-      return TopRateModel.fromJson(jsonDecode(response.body));
-    }
-    throw Exception("Failed to upload top rated series");
   }
 
   Future<PopularMovie> getPopular() async {

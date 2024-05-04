@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:netflix_chienbm/common/utils.dart';
 import 'package:netflix_chienbm/values/src_values.dart';
 
@@ -18,6 +21,7 @@ class MovieCardWidget extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           var data = snapshot.data?.results;
+          log(data.toString());
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -50,7 +54,7 @@ class MovieCardWidget extends StatelessWidget {
             ],
           );
         } else {
-          return const SizedBox.shrink();
+          return const CircularProgressIndicator.adaptive();
         }
       },
     );

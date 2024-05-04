@@ -1,33 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:netflix_chienbm/features/home_page/model/top_rate/top_rated.dart';
+import 'package:get/get.dart';
 import 'package:netflix_chienbm/values/src_values.dart';
 import 'package:netflix_chienbm/widgets/custom_carousel.dart';
 
-import '../../../services/src_api.dart';
 import '../../src_feature.dart';
-import '../model/src_model.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  late Future<UpComingModel> upcomingFuture;
-  late Future<UpComingModel> nowPlaying;
-  late Future<TopRateModel> topRate;
-
-  ApiServices api = ApiServices();
-
-  @override
-  void initState() {
-    super.initState();
-    upcomingFuture = api.getUpComing();
-    nowPlaying = api.getNowPlaying();
-    topRate = api.topRate();
-  }
+  HomePageController get controller => Get.put(HomePageControllerImp());
 
   @override
   Widget build(BuildContext context) {
@@ -64,20 +44,11 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            FutureBuilder(
-              future: topRate,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return CustomCarouselSlider(data: snapshot.data!);
-                } else {
-                  return const SizedBox.shrink();
-                }
-              },
-            ),
+            const CustomCarouselSlider(),
             SizedBox(
               height: AppDimens.sizeImageLarge,
               child: MovieCardWidget(
-                future: nowPlaying,
+                future: controller.nowPlaying,
                 headLineText: AppStr.now,
               ),
             ),
@@ -87,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: AppDimens.sizeImageLarge,
               child: MovieCardWidget(
-                future: upcomingFuture,
+                future: controller.upcoming,
                 headLineText: AppStr.upcoming,
               ),
             )
@@ -95,5 +66,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+    ;
   }
 }

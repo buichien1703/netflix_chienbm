@@ -35,10 +35,11 @@ class BottomNavBar extends StatelessWidget {
             unselectedLabelColor: AppColors.greyShadow,
           ),
         ),
-        body: const TabBarView(
+        body:  TabBarView(
           children: [
             HomeScreen(),
-            SearchScreen(),
+            Container(),
+            // SearchScreen(),
             NewAndHotScreen(),
           ],
         ),

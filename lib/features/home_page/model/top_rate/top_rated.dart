@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class TopRateModel {
     int page;
-    List<Result> results;
+    List<Result> results; // t muốn gọi thằng này ra nma trong class kia ccontroller k trỏ tới đc
     int totalPages;
     int totalResults;
 
